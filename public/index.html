@@ -189,21 +189,6 @@
             gap: 10px;
         }
         
-        #high-score-button {
-            position: absolute;
-            top: 10px;
-            right: 140px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 15;
-        }
-        
         @media (max-width: 820px) {
             #game-container {
                 width: 100%;
@@ -217,12 +202,6 @@
             p.screen-text {
                 font-size: 16px;
             }
-            
-            #high-score-button {
-                right: 110px;
-                padding: 4px 8px;
-                font-size: 14px;
-            }
         }
     </style>
 </head>
@@ -231,7 +210,6 @@
         <canvas id="game-canvas" width="800" height="600"></canvas>
         <div id="score">Score: 0</div>
         <div id="timer">Time: 30s</div>
-        <button id="high-score-button">High Scores</button>
         
         <div id="start-screen">
             <h1 class="screen-title">Frog Snack</h1>
@@ -304,7 +282,6 @@
             const startButton = document.getElementById('start-button');
             const gameOverScreen = document.getElementById('game-over-screen');
             const leaderboardScreen = document.getElementById('leaderboard-screen');
-            const highScoreButton = document.getElementById('high-score-button');
             const viewLeaderboardButton = document.getElementById('view-leaderboard-button');
             const gameOverLeaderboardButton = document.getElementById('game-over-leaderboard-button');
             const closeLeaderboardButton = document.getElementById('close-leaderboard-button');
@@ -1274,16 +1251,6 @@
                 frog.extendTongue();
             }
             
-            // High score button event handler
-            function handleHighScoreButton() {
-                if (gameRunning) {
-                    // Pause the game when viewing high scores during gameplay
-                    gameRunning = false;
-                }
-                
-                showLeaderboard();
-            }
-            
             // Submit score button event handler
             function handleSubmitScore() {
                 const playerName = playerNameInput.value.trim();
@@ -1337,7 +1304,6 @@
                 
                 // Add event listeners for buttons
                 startButton.addEventListener('click', startGame);
-                highScoreButton.addEventListener('click', handleHighScoreButton);
                 viewLeaderboardButton.addEventListener('click', showLeaderboard);
                 gameOverLeaderboardButton.addEventListener('click', showLeaderboard);
                 closeLeaderboardButton.addEventListener('click', hideLeaderboard);
@@ -1348,11 +1314,6 @@
                 startButton.addEventListener('touchstart', function(e) {
                     e.preventDefault();
                     startGame();
-                }, { passive: false });
-                
-                highScoreButton.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    handleHighScoreButton();
                 }, { passive: false });
                 
                 console.log("Game initialized, waiting for start button click");
